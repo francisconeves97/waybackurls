@@ -4,7 +4,7 @@ PROJDIR=$(cd `dirname $0`/.. && pwd)
 VERSION="${1}"
 TAG="v${VERSION}"
 USER="francisconeves97"
-REPO="waybackurls"
+REPO="waybackurls-v2"
 BINARY="${REPO}"
 
 if [[ -z "${VERSION}" ]]; then
