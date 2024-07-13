@@ -229,6 +229,7 @@ func getVirusTotalURLs(domain string, noSubs bool) ([]wurl, error) {
 			// TODO: handle VT date format (2018-03-26 09:22:43)
 			//Date string `json:"scan_date"`
 		} `json:"detected_urls"`
+		UndetectedURLS [][]interface{} `json:"undetected_urls"`
 	}{}
 
 	dec := json.NewDecoder(resp.Body)
@@ -237,6 +238,13 @@ func getVirusTotalURLs(domain string, noSubs bool) ([]wurl, error) {
 
 	for _, u := range wrapper.URLs {
 		out = append(out, wurl{url: u.URL})
+	}
+
+	for _, u := range wrapper.UndetectedURLS {
+		if len(u) > 0 {
+			url := u[0].(string)
+			out = append(out, wurl{url: url})
+		}
 	}
 
 	return out, nil
